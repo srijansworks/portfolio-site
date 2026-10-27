@@ -22,7 +22,7 @@
   /* where the lens flythrough happens */
   var FLASH = { a: 13.7, peak: 14.15, b: 14.6 };
 
-  var rig = $('#rig'), glasses = $('#glasses'), gloss = $('#gloss'), glow = $('#glow'), floorEl = $('#floor');
+  var rig = $('#rig'), glasses = $('#glasses'), gloss = $('#gloss'), glow = $('#glow');
   var veil = $('#veil'), flash = $('#flash'), waves = $$('#waves i');
   var rings = [$('.r1'), $('.r2'), $('.r3')];
   var scroller = $('#scroller'), bar = $('#bar'), hint = $('#hint'), cNow = $('#cNow'), dotsEl = $('#dots');
@@ -31,7 +31,7 @@
 
   /* ---------- the glasses: a few spaced copies give depth when it turns ---------- */
 
-  var LAYERS = 7, STEP = 4.5;
+  var LAYERS = 2, STEP = 1.5;
   function addLayer(src, z, scale, opacity, cls) {
     var im = new Image();
     im.src = src;
@@ -44,10 +44,7 @@
   }
   var deep = LAYERS * STEP + 4;
   var BASE = 'assets/scene/';
-  addLayer(BASE + 'rayban-rim.png', -(deep + 3), 1.05, 0.22, 'rim');
-  addLayer(BASE + 'rayban-rim.png', -(deep + 2), 1.03, 0.4, 'rim');
   addLayer(BASE + 'rayban-rim.png', -(deep + 1), 1.012, 0.9, 'rim');
-  for (var i = 0; i < LAYERS; i++) addLayer(BASE + 'rayban-body.png', -(deep - i * STEP), 1, 1, 'body');
   var front = new Image();
   front.src = BASE + 'rayban.png';
   front.alt = 'Meta Ray-Ban smart glasses';
@@ -73,8 +70,8 @@
     { p: 12.9, x: 34, y: -31, z: -150, rx: 10, ry: -28, rz: -5, s: 0.42 },
     { p: 13.5, x: 6,  y: 0,   z: 0,    rx: 4,  ry: -12, rz: -2, s: 1.15 },
     { p: 14.1, x: 0,  y: 0,   z: 520,  rx: 0,  ry: 0,   rz: 0,  s: 3.0 },
-    { p: 14.16, x: 30, y: 2,  z: -260, rx: 8,  ry: -24, rz: -4, s: 0.7 },
-    { p: 15.2, x: 29, y: 2,   z: 0,    rx: 8,  ry: -22, rz: -4, s: 0.8 }
+    { p: 14.16, x: 34, y: -31, z: -150, rx: 10, ry: -28, rz: -5, s: 0.42 },
+    { p: 15.2, x: 34, y: -31, z: -150, rx: 10, ry: -30, rz: -5, s: 0.42 }
   ];
   var KEYS = ['x', 'y', 'z', 'rx', 'ry', 'rz', 's'];
 
@@ -309,14 +306,14 @@
       for (j = i + 1; j < n; j++) {
         var dx = xs[i] - xs[j], dy = ys[i] - ys[j], d = dx * dx + dy * dy;
         if (d < lim * lim) {
-          ctx.strokeStyle = 'rgba(42,85,255,' + (0.22 * (1 - Math.sqrt(d) / lim)).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(23,92,211,' + (0.16 * (1 - Math.sqrt(d) / lim)).toFixed(3) + ')';
           ctx.beginPath(); ctx.moveTo(xs[i], ys[i]); ctx.lineTo(xs[j], ys[j]); ctx.stroke();
         }
       }
     }
     for (i = 0; i < n; i++) {
       a = pts[i];
-      ctx.fillStyle = a.b ? 'rgba(80,120,255,' + (0.35 + a.z * 0.5).toFixed(2) + ')' : 'rgba(244,247,255,' + (0.12 + a.z * 0.4).toFixed(2) + ')';
+      ctx.fillStyle = a.b ? 'rgba(23,92,211,' + (0.25 + a.z * 0.4).toFixed(2) + ')' : 'rgba(3,5,11,' + (0.1 + a.z * 0.22).toFixed(2) + ')';
       ctx.beginPath(); ctx.arc(xs[i], ys[i], (0.8 + a.z * 1.6) * DPR, 0, 6.2832); ctx.fill();
     }
   }
@@ -377,7 +374,6 @@
     if (!gx) { gx = tgx; gy = tgy; }
     gx += (tgx - gx) * Math.min(1, dt * 3); gy += (tgy - gy) * Math.min(1, dt * 3);
     glow.style.transform = 'translate3d(' + gx.toFixed(0) + 'px,' + gy.toFixed(0) + 'px,0)';
-    floorEl.style.backgroundPosition = '0px ' + (cur * 0.35 + (reduce ? 0 : t * 18)).toFixed(1) + 'px';
 
     /* the trip through the lens */
     var fl = p < FLASH.a ? 0 : p < FLASH.peak ? sm((p - FLASH.a) / (FLASH.peak - FLASH.a)) : p < FLASH.b ? 1 - sm((p - FLASH.peak) / (FLASH.b - FLASH.peak)) : 0;
