@@ -39,7 +39,7 @@ window.PORTFOLIO = {
       id: "scene",
       page: "scene.html",
       title: "Scene",
-      kicker: "Glasses that remember what you said, then help you follow through.",
+      kicker: "A second brain that sees what you see, and hears what you hear.",
       status: "wip",
       statusLine: "In progress. Follow-through tested with staged conversations.",
       year: "2026",
