@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scene | Srijan Saha</title>
+<meta name="description" content="Scene: smart glasses that remember what you said, then help you follow through. I built the Follow-Through agent with Gemini 4 Argon.">
+<meta name="theme-color" content="#03050b">
+<link rel="preload" href="assets/scene/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/scene/scene.css">
+</head>
+<body>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div class="stage" id="stage">
+
+  <div class="floor" id="floor" aria-hidden="true"></div>
+  <div class="glow" id="glow" aria-hidden="true"></div>
+
+  <div class="scene3d" aria-hidden="true">
+    <div class="rig" id="rig">
+      <div class="aura"></div>
+      <div class="ring r1"><i></i></div>
+      <div class="ring r2"><i></i></div>
+      <div class="ring r3"><i></i></div>
+      <div class="glasses" id="glasses">
+        <div class="gloss" id="gloss"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="waves" id="waves" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="veil" id="veil" aria-hidden="true"></div>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <!-- 01 hero -->
+  <section class="slide s0" data-in="-1,-0.5" data-out="0.35,0.95">
+    <p class="sub kick" data-u="words">Built at the Gemini 4 Argon hackathon</p>
+    <h1 class="title" data-u="chars" aria-label="Scene.">SCENE<span class="dot">.</span></h1>
+    <p class="sub tag" data-u="words">Glasses that remember what you said, then help you follow through.</p>
+    <div class="team" data-u="block">
+      <b>I built the Follow&#8209;Through agent</b>
+      <span>with Gemini 4 Argon</span>
+    </div>
+  </section>
+
+  <!-- 02 how it works -->
+  <section class="slide s1" data-in="0.55,1.2" data-out="3.05,3.55">
+    <p class="eyebrow" data-u="words">01 / How it works</p>
+    <h2 class="head" data-u="words">From conversation to follow&#8209;through.</h2>
+    <ol class="steps">
+      <li class="step" data-u="step" data-act="1.1">
+        <span class="num">01</span>
+        <div><h3 class="sub">Capture</h3><p>Glasses capture video and audio from conversations.</p></div>
+      </li>
+      <li class="step" data-u="step" data-act="1.65">
+        <span class="num">02</span>
+        <div><h3 class="sub">Understand</h3><p>Argon reads the transcript. The goal is for it to read the video too: whiteboards, slides, notes.</p></div>
+      </li>
+      <li class="step" data-u="step" data-act="2.2">
+        <span class="num">03</span>
+        <div><h3 class="sub">Act</h3><p>Agents draft the email, event, or to&#8209;do. You approve each one.</p></div>
+      </li>
+    </ol>
+    <div class="rail"><b></b></div>
+
+    <div class="dock">
+      <div class="panel p-cap">
+        <span class="label">Video + audio</span>
+        <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="vf"><s></s><s></s><s></s><s></s></div>
+      </div>
+      <div class="panel p-und">
+        <span class="label">Example</span>
+        <p class="quote">&ldquo;I'll send you the deck by <mark>2 PM</mark>.&rdquo;</p>
+        <div class="found"><span>Promise found</span><b>Send the deck</b><em>2 PM</em></div>
+      </div>
+      <div class="panel p-act">
+        <span class="label">Waiting for you</span>
+        <ul>
+          <li><span>Email draft</span><b>Approve</b></li>
+          <li><span>Calendar event</span><b>Approve</b></li>
+          <li><span>To&#8209;do</span><b>Approve</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 under the hood -->
+  <section class="slide s2 split" data-in="3.25,3.9" data-out="4.9,5.4">
+    <div class="top">
+      <p class="eyebrow" data-u="words">02 / Under the hood</p>
+      <h2 class="head" data-u="words">What runs behind the glasses.</h2>
+    </div>
+    <div class="cards four">
+      <div class="flow" aria-hidden="true"><i></i></div>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">Glasses</span>
+        <p data-u="words">Ray&#8209;Ban Meta glasses capture video and audio.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">iPhone bridge</span>
+        <p data-u="words">A Swift app cuts the stream into 30 second chunks and uploads them. It holds chunks if you go offline.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">Backend</span>
+        <p data-u="words">Python. Whisper writes the transcript, Gemini 4 Argon reads each chunk, and every chunk is stored as a scene.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">App and lens</span>
+        <p data-u="words">A SwiftUI phone app, plus a small web view for the glasses display. Ask a question, approve a follow&#8209;up.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 the follow-through agent -->
+  <section class="slide s3" data-in="5.2,5.85" data-out="8.6,9.1">
+    <p class="eyebrow" data-u="words">03 / The part I built</p>
+    <h2 class="head" data-u="words">The Follow&#8209;Through agent.</h2>
+    <ol class="steps">
+      <li class="step" data-u="step" data-act="5.9">
+        <span class="num">01</span>
+        <div><h3 class="sub">Find</h3><p>Argon reads the conversation and lists every promise, each with the exact quote.</p></div>
+      </li>
+      <li class="step" data-u="step" data-act="6.4">
+        <span class="num">02</span>
+        <div><h3 class="sub">Prove</h3><p>Code checks each quote against the transcript. No match means no draft, only a flag for review.</p></div>
+      </li>
+      <li class="step" data-u="step" data-act="6.9">
+        <span class="num">03</span>
+        <div><h3 class="sub">Draft</h3><p>It writes the email, reply, calendar event, or to&#8209;do. If a deadline changed, it uses the latest one.</p></div>
+      </li>
+      <li class="step" data-u="step" data-act="7.4">
+        <span class="num">04</span>
+        <div><h3 class="sub">Approve</h3><p>Nothing goes out until you tap approve. Then it opens a ready Gmail or Calendar draft, or saves the to&#8209;do.</p></div>
+      </li>
+    </ol>
+    <div class="rail"><b></b></div>
+
+    <div class="dock big">
+      <div class="panel p-find">
+        <span class="label">Example conversation</span>
+        <p class="tline"><i>Nayan</i> <mark>I'll send Maya the deck by 2 PM.</mark></p>
+        <p class="tline"><i>Srijan</i> Can we also book a check&#8209;in?</p>
+        <p class="tline"><i>Nayan</i> <mark>Yes, 20 minutes, after lunch.</mark></p>
+        <div class="found"><span>Promises found</span><b>2</b></div>
+      </div>
+      <div class="panel p-prove">
+        <span class="label">Quote check</span>
+        <ul>
+          <li><span>&ldquo;I'll send Maya the deck by 2 PM.&rdquo;</span><b class="ok">Match</b></li>
+          <li><span>A quote that isn't in the transcript</span><b class="no">Needs review</b></li>
+        </ul>
+        <p class="note">No match means no draft is written.</p>
+      </div>
+      <div class="panel p-draft">
+        <span class="label">Draft</span>
+        <div class="mail">
+          <p><i>To</i> Maya</p>
+          <p><i>Subject</i> The deck</p>
+          <p class="body">Hi Maya, here is the deck as promised. It will reach you by <s>2&nbsp;PM</s> <mark>3&nbsp;PM</mark>.</p>
+        </div>
+        <p class="note">Deadline changed in the conversation. The latest one is used.</p>
+      </div>
+      <div class="panel p-act">
+        <span class="label">Waiting for you</span>
+        <ul>
+          <li><span>Email draft</span><b>Approve</b></li>
+          <li><span>Calendar event</span><b>Approve</b></li>
+          <li><span>To&#8209;do</span><b>Approve</b></li>
+        </ul>
+        <p class="note">Approve opens the draft. Nothing is sent for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 who -->
+  <section class="slide s4 split" data-in="8.8,9.45" data-out="10.5,11.0">
+    <div class="top">
+      <p class="eyebrow" data-u="words">04 / Who it's for</p>
+      <h2 class="head" data-u="words">Who is it for?</h2>
+    </div>
+    <div class="cards">
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">01</span>
+        <h3 class="sub" data-u="words">Event networkers</h3>
+        <p data-u="words">Forget who they met and what they promised.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">02</span>
+        <h3 class="sub" data-u="words">Team leads</h3>
+        <p data-u="words">Promised tasks get lost after the meeting.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">03 / Later</span>
+        <h3 class="sub" data-u="words">Service teams</h3>
+        <p data-u="words">Complaints never turn into fixes.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 where it stands -->
+  <section class="slide s5 split" data-in="10.7,11.35" data-out="12.4,12.9">
+    <div class="top">
+      <p class="eyebrow" data-u="words">05 / Where it stands</p>
+      <h2 class="head" data-u="words">What works, and what doesn't yet.</h2>
+    </div>
+    <div class="cards">
+      <article class="card hot" data-u="card">
+        <span class="num" data-u="words">Working in tests</span>
+        <p data-u="words">The Follow&#8209;Through agent on staged conversations. The backend reading a whole session and answering questions about it.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">Not proven yet</span>
+        <p data-u="words">The glasses streaming into the phone. The bridge code is written, but the hardware test hasn't been run. One real conversation, start to finish.</p>
+      </article>
+      <article class="card" data-u="card">
+        <span class="num" data-u="words">Not built yet</span>
+        <p data-u="words">Video proof for answers, with frames and timestamps. Knowing who is speaking, since labels are set by hand. Sending email or saving events for you.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 07 close -->
+  <section class="slide s6" data-in="13.9,14.6" data-out="99,100">
+    <h2 class="title" data-u="words">Remember what you said.</h2>
+    <p class="sub accent" data-u="words">Decide what happens next.</p>
+    <div class="links" data-u="block">
+      <a class="btn" href="https://github.com/NayanVangala/argon4hack" target="_blank" rel="noopener">See the code on GitHub</a>
+      <a class="btn ghost" href="index.html#work">Back to my work</a>
+    </div>
+    <p class="credits" data-u="block">Follow&#8209;Through agent and approval system: Srijan Saha. Backend and glasses bridge: Nayan Vangala. Phone app and lens at the hackathon: Isabella Doan.</p>
+  </section>
+
+  <!-- HUD -->
+  <header class="hud">
+    <div class="brand">SCENE<span>.</span></div>
+    <a class="back" href="index.html#work">Back to work</a>
+    <div class="count"><span id="cNow">01</span><i></i><span id="cAll">07</span></div>
+  </header>
+  <nav class="dots" id="dots" aria-label="Sections"></nav>
+  <div class="hint" id="hint"><span>Scroll</span><i></i></div>
+  <div class="bar"><b id="bar"></b></div>
+
+</div>
+
+<div class="scroller" id="scroller"></div>
+
+<noscript>
+  <style>.stage,#fx{display:none}.scroller{display:none}</style>
+  <main style="max-width:640px;margin:0 auto;padding:60px 24px;font-family:system-ui,sans-serif;color:#f4f7ff">
+    <h1>Scene</h1>
+    <p>Glasses that remember what you said, then help you follow through. I built the Follow-Through agent with Gemini 4 Argon. It finds promises in a conversation, checks each quote against the transcript, drafts the follow-up, and waits for approval before anything goes out.</p>
+    <p><a style="color:#8aa4ff" href="https://github.com/NayanVangala/argon4hack">Code on GitHub</a> | <a style="color:#8aa4ff" href="index.html#work">Back to my work</a></p>
+  </main>
+</noscript>
+
+<script src="assets/scene/scene.js"></script>
+</body>
+</html>
