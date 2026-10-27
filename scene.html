@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scene | Srijan Saha</title>
 <meta name="description" content="Scene: smart glasses that remember what you said, then help you follow through. I built the Follow-Through agent with Gemini 4 Argon.">
-<meta name="theme-color" content="#03050b">
+<meta name="theme-color" content="#f7f9ff">
 <link rel="preload" href="assets/scene/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/scene/scene.css">
 </head>
@@ -15,7 +15,6 @@
 
 <div class="stage" id="stage">
 
-  <div class="floor" id="floor" aria-hidden="true"></div>
   <div class="glow" id="glow" aria-hidden="true"></div>
 
   <div class="scene3d" aria-hidden="true">
@@ -79,9 +78,9 @@
       <div class="panel p-act">
         <span class="label">Waiting for you</span>
         <ul>
-          <li><span>Email draft</span><b>Approve</b></li>
-          <li><span>Calendar event</span><b>Approve</b></li>
-          <li><span>To&#8209;do</span><b>Approve</b></li>
+          <li><span>Email Maya the deck</span><b>Approve</b></li>
+          <li><span>Schedule check&#8209;in on Google Calendar</span><b>Approve</b></li>
+          <li><span>Add &ldquo;send the deck&rdquo; to your to&#8209;do list</span><b>Approve</b></li>
         </ul>
       </div>
     </div>
@@ -133,7 +132,7 @@
       </li>
       <li class="step" data-u="step" data-act="7.4">
         <span class="num">04</span>
-        <div><h3 class="sub">Approve</h3><p>Nothing goes out until you tap approve. Then it opens a ready Gmail or Calendar draft, or saves the to&#8209;do.</p></div>
+        <div><h3 class="sub">Approve</h3><p>Nothing goes out until you tap approve. Then it opens a ready Gmail draft or Google Calendar event, or saves the to&#8209;do.</p></div>
       </li>
     </ol>
     <div class="rail"><b></b></div>
@@ -144,15 +143,15 @@
         <p class="tline"><i>Nayan</i> <mark>I'll send Maya the deck by 2 PM.</mark></p>
         <p class="tline"><i>Srijan</i> Can we also book a check&#8209;in?</p>
         <p class="tline"><i>Nayan</i> <mark>Yes, 20 minutes, after lunch.</mark></p>
-        <div class="found"><span>Promises found</span><b>2</b></div>
+        <div class="found"><span>Promises found</span><b>1. Send Maya the deck by 2&nbsp;PM</b><b>2. Check&#8209;in, 20 mins after lunch</b></div>
       </div>
       <div class="panel p-prove">
         <span class="label">Quote check</span>
         <ul>
           <li><span>&ldquo;I'll send Maya the deck by 2 PM.&rdquo;</span><b class="ok">Match</b></li>
-          <li><span>A quote that isn't in the transcript</span><b class="no">Needs review</b></li>
+          <li><span>&ldquo;I'll have the budget done by Friday.&rdquo;</span><b class="no">Needs review</b></li>
         </ul>
-        <p class="note">No match means no draft is written.</p>
+        <p class="note">Nobody said the budget line in this conversation, so no draft is written. It is flagged for review instead.</p>
       </div>
       <div class="panel p-draft">
         <span class="label">Draft</span>
@@ -166,9 +165,9 @@
       <div class="panel p-act">
         <span class="label">Waiting for you</span>
         <ul>
-          <li><span>Email draft</span><b>Approve</b></li>
-          <li><span>Calendar event</span><b>Approve</b></li>
-          <li><span>To&#8209;do</span><b>Approve</b></li>
+          <li><span>Email Maya the deck by 2&nbsp;PM</span><b>Approve</b></li>
+          <li><span>Schedule a 20 min check&#8209;in with Maya on Google Calendar</span><b>Approve</b></li>
+          <li><span>Add &ldquo;send Maya the deck&rdquo; to your to&#8209;do list</span><b>Approve</b></li>
         </ul>
         <p class="note">Approve opens the draft. Nothing is sent for you.</p>
       </div>
@@ -185,17 +184,17 @@
       <article class="card" data-u="card">
         <span class="num" data-u="words">01</span>
         <h3 class="sub" data-u="words">Event networkers</h3>
-        <p data-u="words">Forget who they met and what they promised.</p>
+        <p data-u="words">It's impossible to remember the dozens of people and slide decks you see in a day. Scene catches everything important about each person, what they do, what you promised, and the slide that made you want to follow up, and remembers it for you.</p>
       </article>
       <article class="card" data-u="card">
         <span class="num" data-u="words">02</span>
         <h3 class="sub" data-u="words">Team leads</h3>
-        <p data-u="words">Promised tasks get lost after the meeting.</p>
+        <p data-u="words">Tasks get said out loud in a meeting and forgotten by Friday. Scene hears who promised what and by when, then turns it into a to&#8209;do list and calendar reminders, so nothing depends on someone taking notes.</p>
       </article>
       <article class="card" data-u="card">
         <span class="num" data-u="words">03 / Later</span>
         <h3 class="sub" data-u="words">Service teams</h3>
-        <p data-u="words">Complaints never turn into fixes.</p>
+        <p data-u="words">A customer says what went wrong at the counter or on a call, and it never reaches the people who can fix it. Scene catches each complaint, spots the ones that repeat, and turns them into a fix list.</p>
       </article>
     </div>
   </section>
@@ -224,8 +223,8 @@
 
   <!-- 07 close -->
   <section class="slide s6" data-in="13.9,14.6" data-out="99,100">
-    <h2 class="title" data-u="words">Remember what you said.</h2>
-    <p class="sub accent" data-u="words">Decide what happens next.</p>
+    <h2 class="title" data-u="words">A second brain that sees what you see, and hears what you hear.</h2>
+    <p class="sub accent" data-u="words">Powered by Meta Ray&#8209;Bans</p>
     <div class="links" data-u="block">
       <a class="btn" href="https://github.com/NayanVangala/argon4hack" target="_blank" rel="noopener">See the code on GitHub</a>
       <a class="btn ghost" href="index.html#work">Back to my work</a>
@@ -235,7 +234,7 @@
 
   <!-- HUD -->
   <header class="hud">
-    <div class="brand">SCENE<span>.</span></div>
+    <div class="brand"><svg viewBox="10 10 44 44" aria-hidden="true" focusable="false"><path d="M42.5 16.2L21.5 24.8L16.2 42.5L24.8 21.5L42.5 16.2Z" fill="#175CD3"/><path d="M47.8 21.5L26.8 30.1L21.5 47.8L30.1 26.8L47.8 21.5Z" fill="#175CD3"/></svg><b>SCENE<span>.</span></b></div>
     <a class="back" href="index.html#work">Back to work</a>
     <div class="count"><span id="cNow">01</span><i></i><span id="cAll">07</span></div>
   </header>
@@ -249,10 +248,10 @@
 
 <noscript>
   <style>.stage,#fx{display:none}.scroller{display:none}</style>
-  <main style="max-width:640px;margin:0 auto;padding:60px 24px;font-family:system-ui,sans-serif;color:#f4f7ff">
+  <main style="max-width:640px;margin:0 auto;padding:60px 24px;font-family:system-ui,sans-serif;color:#03050b;background:#f7f9ff">
     <h1>Scene</h1>
     <p>Glasses that remember what you said, then help you follow through. I built the Follow-Through agent with Gemini 4 Argon. It finds promises in a conversation, checks each quote against the transcript, drafts the follow-up, and waits for approval before anything goes out.</p>
-    <p><a style="color:#8aa4ff" href="https://github.com/NayanVangala/argon4hack">Code on GitHub</a> | <a style="color:#8aa4ff" href="index.html#work">Back to my work</a></p>
+    <p><a style="color:#175cd3" href="https://github.com/NayanVangala/argon4hack">Code on GitHub</a> | <a style="color:#175cd3" href="index.html#work">Back to my work</a></p>
   </main>
 </noscript>
 
