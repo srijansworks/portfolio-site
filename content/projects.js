@@ -3,7 +3,7 @@ window.PORTFOLIO = {
   "profile": {
     "name": "Srijan Saha",
     "role": "Intern @ TKS",
-    "line": "I build autonomous drones and vision systems, then measure where they break.",
+    "line": "working on vision systems",
     "readout": [
       {
         "label": "Now",

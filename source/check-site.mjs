@@ -15,3 +15,19 @@ globalThis.fetch=async()=>{throw Error('offline');};assert.equal((await request(
 console.log(`${checked} HTML pages: local links, contact/booking values, reduced-motion navigation, and counter failure paths passed. Live Production access is not exercised by these local checks.`);
 
 await import('./check-transitions.mjs');
+
+// No baseline or stale number is rendered while the live request is pending.
+assert(home.includes('<p class="hero-visit-number" data-hero-visits hidden></p>'));
+assert(home.includes('working on <em>vision systems</em>'));
+const greetingSource=fs.readFileSync(root+'/assets/js/visit-greeting.js','utf8');
+async function checkGreeting(response){
+ let resolveRequest,calls=0;const number={hidden:true,children:[],replaceChildren(){this.children=[];},append(...nodes){this.children.push(...nodes);}};
+ const note={dataset:{},querySelector(selector){return selector==='[data-hero-visits]'?number:{textContent:''};}};
+ const context={document:{hidden:false,querySelector:()=>note,addEventListener(){},createTextNode:text=>({textContent:text}),createElement:()=>({})},matchMedia:()=>({matches:true,addEventListener(){}}),IntersectionObserver:class{observe(){}},clearInterval(){},setInterval(){},fetch(){calls++;return new Promise(resolve=>{resolveRequest=resolve;});}};
+ vm.runInNewContext(greetingSource,context);
+ assert.equal(number.hidden,true);assert.equal(number.children.length,0);assert.equal(calls,1);
+ resolveRequest(response);await new Promise(resolve=>setImmediate(resolve));return number;
+}
+const loaded=await checkGreeting({ok:true,json:async()=>({visits:456,labelApproved:true})});assert.equal(loaded.hidden,false);assert.equal(loaded.children.map(n=>n.textContent).join(''),'visit #456.');
+for(const response of [{ok:false},{ok:true,json:async()=>({visits:456,labelApproved:false})},{ok:true,json:async()=>({visits:0,labelApproved:true})}])assert.equal((await checkGreeting(response)).hidden,true);
+console.log('Visit count stays empty and hidden until a valid live response; failures never reveal a baseline. Updated hero copy passed.');

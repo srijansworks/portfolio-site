@@ -9,6 +9,6 @@
  fetch('/api/visits',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(r=>r.ok?r.json():null).then(data=>{
   if(!data?.labelApproved||!Number.isSafeInteger(data.visits)||data.visits<327)return;
   number.replaceChildren();const label=document.createTextNode('visit #'),value=document.createElement('b');value.textContent=data.visits.toLocaleString();number.append(label,value,document.createTextNode('.'));
-  number.title='Visits, including a configured starting number of 327. Repeated homepage loads count; this is not unique people or people online.';note.dataset.live='true';
+  number.title='Visits, including a configured starting number of 327. Repeated homepage loads count; this is not unique people or people online.';number.hidden=false;note.dataset.live='true';
  }).catch(()=>{});
 })();
