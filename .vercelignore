@@ -1,0 +1,15 @@
+.git
+source/blender
+source/database
+lunar-rl
+.env*
+*.blend1
+
+source/asset-inspection.html
+
+source/archive
+assets/models/drone.glb
+assets/models/glasses.glb
+assets/models/rocket.glb
+
+source/previews

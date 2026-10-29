@@ -4,3 +4,12 @@ node_modules
 
 
 
+
+.env
+.env.local
+.env.*.local
+*.blend1
+
+.env*
+!.env.example
+source/archive/

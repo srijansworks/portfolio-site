@@ -1,0 +1,14 @@
+{
+  "supabase_project": "portfolio-visits",
+  "supabase_url": "https://pakijvtgycmiabkipfgf.supabase.co",
+  "vercel_project": "srijansaha",
+  "vercel_project_url": "https://vercel.com/srijan25-32f5/srijansaha",
+  "environment_scope": "Production only",
+  "starting_number": 327,
+  "label": "visits",
+  "sql_setup": "User confirmed migration succeeded and read-only check returned 327",
+  "environment_setup": "User confirmed SUPABASE_URL, SUPABASE_SECRET_KEY, VISIT_COUNTER_LABEL_APPROVED configured for Production; absent in Preview and Development",
+  "verification_status": "Local checks passed; authenticated remote configuration and live function have not been independently verified",
+  "deployment_status": "Awaiting user approval; no commit, push, or deployment performed",
+  "secrets_stored_here": false
+}

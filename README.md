@@ -1,3 +1,13 @@
+# Current revamp workflow
+
+The active review is documented in `source/REVIEW.md`. Generate pages with `npm run build` and validate with `npm run check`. Preview locally with `python3 -m http.server 8765 --bind 127.0.0.1`. Content lives in `content/projects.js`; layout generation is `source/build-site.mjs`, styles are `assets/css/revamp.css`. Blender sources and preview provenance live under `source/`.
+
+Persistent counting is unconfigured and hidden until a real backend and the public label are approved. Do not deploy without user approval.
+
+---
+
+The following is the original project documentation, retained for historical implementation context.
+
 # Srijan Saha — engineering portfolio
 
 A static site. No build step, no dependencies, no framework. Three files do the

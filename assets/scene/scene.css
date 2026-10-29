@@ -648,3 +648,5 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) {
   .p-cap .wave i, .p-und mark, .hint i, .flow i { animation: none; }
 }
+/* Persistent portfolio contacts; the existing seven-section demo stays intact. */
+.scene-contact-strip{position:fixed;inset:0 0 auto;z-index:30;height:48px;padding:0 var(--pad);display:flex;justify-content:flex-end;align-items:center;gap:27px;background:#f7f9ffeb;backdrop-filter:blur(14px);border-bottom:1px solid #03050b12;font:600 13px Manrope,sans-serif}.scene-contact-strip a{text-decoration:none;color:#203c39}.scene-contact-strip a:hover{color:#175cd3}.scene-contact-strip a:focus-visible{outline:2px solid #175cd3;outline-offset:5px}.hud{top:65px}.bar{top:48px}@media(max-width:700px){.scene-contact-strip{padding:0 20px;gap:10px;justify-content:space-between;font-size:11px}.hud{top:63px}}

@@ -1,0 +1,16 @@
+{
+  "source": "IMG_0590.mov",
+  "output": "pan-tilt-rig-preview.mp4",
+  "duration_seconds": 16.291666666666668,
+  "resolution": [
+    480,
+    854
+  ],
+  "fps": 24,
+  "audio": "none",
+  "codec": "H.264",
+  "fast_start": true,
+  "video_bytes": 1395996,
+  "original_untouched": true,
+  "caption": "Rough servo-motion setup, recorded on the bench."
+}

@@ -1,0 +1,23 @@
+{
+  "source": "202610211700ous Drone Focus Build - Rough CuA(1).mov",
+  "segment_seconds": [
+    76,
+    91
+  ],
+  "evidence": "Visible green human tracking box and pose markers following a moving person. Does not independently establish flight-command response.",
+  "preview": "human-tracking-demo-preview-15s.mp4",
+  "poster": "human-tracking-demo-poster-15s.jpg",
+  "codec": "H.264",
+  "audio": "none",
+  "resolution": [
+    960,
+    540
+  ],
+  "fps": 24,
+  "frames": 360,
+  "duration_seconds": 15.0,
+  "fast_start": true,
+  "video_bytes": 3295573,
+  "poster_bytes": 91021,
+  "source_size_and_modification_time_unchanged": true
+}

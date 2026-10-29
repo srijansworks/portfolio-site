@@ -1,0 +1,8 @@
+{
+  "name": "srijan-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "node source/build-site.mjs",
+    "check": "node source/check-site.mjs"
+  }
+}
