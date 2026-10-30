@@ -506,6 +506,46 @@ window.PORTFOLIO = {
       ],
       "evidence": [],
       "links": []
+    },
+    {
+      "id": "autoprompter",
+      "title": "AutoPrompter",
+      "kicker": "Improve a draft with Gemini, then get a second review from Cursor before sending.",
+      "status": "wip",
+      "statusLine": "Working in Aside on ChatGPT. Claude support is still being tested.",
+      "year": "2026",
+      "tags": [
+        "JavaScript",
+        "Browser extension",
+        "Gemini API",
+        "Cursor CLI"
+      ],
+      "summary": "A personal browser extension for improving prompts inside ChatGPT and Claude. Gemini rewrites the draft, an optional local Cursor helper reviews coding prompts, and the user decides what to keep or send. A per-site Intercept switch lets quick questions go through normally.",
+      "built": [
+        "A review panel with editable Gemini rewrites, assumptions, and changes.",
+        "An optional Cursor CLI helper for a second review of coding prompts.",
+        "A saved Intercept on/off switch beside Improve prompt, with manual improvement available when interception is off."
+      ],
+      "caveats": [
+        "ChatGPT improvement and Cursor review were tested in Aside. Claude rewrites timed out during testing.",
+        "Draft replacement can report a failed write when the editor changes paragraph spacing.",
+        "Requires a Gemini API key; Cursor review also requires the local Cursor CLI and helper."
+      ],
+      "hardest": {
+        "title": "Working with changing chat editors",
+        "body": "The extension has to preserve the draft, handle browser-extension reloads, and confirm that an editable chat box actually accepted a replacement. Site-specific editor behavior is still being refined."
+      },
+      "next": [
+        "Make draft replacement verification robust to paragraph spacing.",
+        "Improve reliability on Claude and test more browser versions."
+      ],
+      "evidence": [],
+      "links": [
+        {
+          "label": "View source on GitHub",
+          "url": "https://github.com/srijansworks/Auto-PromptEngineer"
+        }
+      ]
     }
   ],
   "beyond": {
