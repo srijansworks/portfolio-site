@@ -70,6 +70,11 @@ window.PORTFOLIO = {
       "glyph": "half",
       "note": "Partly working."
     },
+    "closed": {
+      "label": "Completed, discontinued",
+      "glyph": "hatch",
+      "note": "Finished as a research study. Not pursued as a product."
+    },
     "simulation": {
       "label": "Simulation only",
       "glyph": "hatch",
@@ -267,45 +272,150 @@ window.PORTFOLIO = {
     },
     {
       "id": "maritime-search-simulation",
-      "title": "Maritime drone search, in simulation",
-      "kicker": "How long would a drone need to find a boat from a stale satellite tip?",
-      "status": "simulation",
-      "statusLine": "Simulation only. The assumptions are still unchecked.",
+      "title": "Maritime cue-and-search drone planning",
+      "kicker": "A completed research project: can a drone find a boat that has moved since its satellite tip?",
+      "status": "closed",
+      "statusLine": "Completed and discontinued as a product. Simulation only; nothing was flown at sea.",
       "year": "2026",
       "tags": [
         "Simulation",
         "Search planning",
         "Drones"
       ],
-      "summary": "The older a satellite tip gets, the bigger the area a drone has to search. The model uses real ship tracks, but the answer depends heavily on assumptions I haven't verified yet.",
+      "summary": "A satellite spots a boat, but by the time a drone arrives the boat has moved. I built a simulation to test how old a tip can get before a drone team can no longer find it, and whether a probability-based search plan beats standard patterns. The investigation showed the answer depends on assumptions I could not validate, so I stopped pursuing a product and kept the work as a research record.",
+      "caveats": [
+        "Everything on this page is a result from my simulation, under the assumptions listed below. None of it is a measured real-world performance.",
+        "The review that led me to stop was an AI-assisted, multi-perspective review with web research. It was not a panel of human experts, and its claims about satellite latency and hardware limits are not independently verified.",
+        "The simulation had flaws I confirmed in the code: the planner's guesses came from the same boat model that made the test boats, and the real-track prior did not exclude vessels that also appeared in the test day."
+      ],
+      "caveatTitle": "What this does not prove",
+      "explainer": [
+        {
+          "id": "problem",
+          "title": "The problem",
+          "paras": [
+            "Standard Coast Guard search patterns were designed for slow, drifting targets. A boat moving at 10 to 30 knots leaves the old tip behind quickly, so the area to search grows with the square of how old the tip is.",
+            "The repository is named Traffic-drone because it began as a human-trafficking idea. There is no road-traffic or triangulation component. I checked the original premise (traffickers hide under cloud) early and found it was wrong, because radar satellites see through cloud, so I changed the question to what happens after a tip."
+          ]
+        },
+        {
+          "id": "results",
+          "title": "What the experiments showed",
+          "paras": [
+            "Percent of simulated boats found within the drone's endurance, 2,000 boats per setting for the straight-line runs. These describe the model, not the real world."
+          ],
+          "table": {
+            "head": [
+              "Setting",
+              "Result"
+            ],
+            "rows": [
+              [
+                "1 drone, 10 min tip: standard square / ring / smart",
+                "0.4% / 14.8% / 21.9%"
+              ],
+              [
+                "3 drones, 10 min tip: smart separate / smart shared map",
+                "31.6% / 49.8%"
+              ],
+              [
+                "1 drone with a 2 min tip vs 3 drones with a 10 min tip",
+                "81.8% vs 49.8%"
+              ],
+              [
+                "Camera range 1 km vs 500 m (3 drones, shared map)",
+                "51.8% to 28.1%"
+              ],
+              [
+                "Real fishing paths, 3 drones, 10 min tip: spiral / smart / smart learned from other days",
+                "80.1% / 88.1% / 92.2%"
+              ],
+              [
+                "Experiment 26: 10,220 real AIS gaps of 12 to 24 h: circle / learned / straight-line",
+                "25.4% / 24.5% / 0.0%"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "exp26",
+          "title": "Experiment 26: the circle matched the planner",
+          "paras": [
+            "I tested where boats that switched off their tracker actually reappear, using Global Fishing Watch data. With no heading information, a plain circle around the last known position caught 25.4% of boats. My learned motion model caught 24.5%. My original straight-line guess caught 0.0%, because these boats mostly loiter instead of running.",
+            "The lesson is specific: the smart search only helps when the tip carries direction or speed. Without that, there is nothing to exploit. This test covers large fishing vessels and 12 to 24 hour tips, so it says nothing about small boats or fresh tips."
+          ]
+        },
+        {
+          "id": "assumptions",
+          "title": "Assumptions that proved unrealistic",
+          "list": [
+            "A perfect 360 degree camera out to 1 km. Halving the range cut the shared-map result from 51.8% to 28.1%.",
+            "Tips only 2 to 10 minutes old with 100 m error. Vendor-reported satellite detection latencies are reported in hours, which I did not verify, and my own simulation finds under 6% for one drone at 30+ minutes.",
+            "No transit, launch, comms, weather or airspace, and open-loop flight paths.",
+            "Straight-line boats and legal AIS boats, instead of boats evading a patrol.",
+            "A planner that is not new: a particle cloud with searched water crossed off is the architecture of established search-planning systems."
+          ]
+        },
+        {
+          "id": "stop",
+          "title": "Why I stopped",
+          "paras": [
+            "The headline numbers rested on the assumptions above. My strongest finding, that tip age dominates, points at data latency and logistics rather than at a better planner. I had no evidence that any operator needed this or would pay for it. Continuing would have meant polishing a demo on top of unvalidated inputs, so I closed the product direction and kept the work."
+          ]
+        },
+        {
+          "id": "learned",
+          "title": "What I learned",
+          "list": [
+            "A simulation shows what follows from its assumptions, so validate the biggest assumption first. I validated it last.",
+            "A win over a weak baseline is not a strong result. A plain circle was the baseline that mattered.",
+            "Write the prediction down before the experiment. It kept me from rationalizing results afterwards.",
+            "Negative results are results, and knowing when the evidence says stop is part of engineering."
+          ]
+        }
+      ],
       "built": [
-        "A replay built on real NOAA ship tracks.",
-        "A model of how the search area grows as the tip gets older.",
-        "A comparison of two search patterns on the same boats."
+        "A Python simulation (about 2,200 lines, numpy and matplotlib) of boats, drones and cameras, with a mechanics test suite.",
+        "Four search planners (expanding square, ring search, a particle-cloud probability search, and a shared-map version for drone teams), plus Brown's FAB as a comparison.",
+        "Replays of real fishing and pleasure-craft tracks from public NOAA AIS data, and a test on 10,220 real AIS-gap events from Global Fishing Watch.",
+        "Confidence intervals on the results and a written prediction for each experiment, committed before I ran it.",
+        "A 2D and 3D browser replay of the simulated runs."
       ],
       "hardest": {
-        "title": "The answer mostly follows my assumptions",
-        "body": "Vessel speed, tip age, drone endurance and sensor range move the result more than the search pattern does. So I'm checking those assumptions before building more patterns."
+        "title": "The planner's edge disappeared when I tested it honestly",
+        "body": "On real paths the smart search beat a plain spiral by only a few points, and in Experiment 26 a circle matched it. Fixing that would have needed real tip data, a realistic camera model and vessel-disjoint testing that I did not have, so I documented the gap instead of covering it up."
       },
-      "next": [
-        "Write down every assumption, with a source or a clear guess.",
-        "Replace the guessed values with published data."
-      ],
-      "caveats": [
-        "Simulation results only. Nothing has been flown or tested at sea."
-      ],
+      "next": [],
       "evidence": [
         {
           "type": "video",
           "src": "assets/media/maritime-search-simulation-1.mp4",
           "poster": "assets/media/maritime-search-simulation-1.jpg",
           "caption": "One simulated run: a ten-minute-old tip, late drones, and a search that ends when the battery runs out. 47 sec."
+        },
+        {
+          "type": "image",
+          "src": "assets/media/maritime-search-found-vs-tip-age.png",
+          "caption": "Simulation output: share of boats found vs tip age, 3 drones, perfect 1 km camera, straight-line boats. A fresh tip beats a smarter search."
+        },
+        {
+          "type": "image",
+          "src": "assets/media/maritime-search-snapshot-10min.png",
+          "caption": "Simulation output: the three single-drone paths for a 10 minute old tip. The orange dots are where the boat could be when the drone arrives."
         }
       ],
       "links": [
         {
           "label": "Open live demo",
           "url": "https://venerable-belekoy-e16bb4.netlify.app/"
+        },
+        {
+          "label": "Code and write-up on GitHub",
+          "url": "https://github.com/srijansworks/Traffic-drone"
+        },
+        {
+          "label": "Research summary",
+          "url": "https://github.com/srijansworks/Traffic-drone/blob/main/docs/RESEARCH_SUMMARY.md"
         }
       ]
     },
